@@ -15,7 +15,7 @@
             --bundle-color: #9d00ff;  /* Deep Purple */
             --text-main: #ffffff;
             --text-muted: #888888;
-            --currency-green: #00ff66; /* Matrix Green for the top currency bar */
+            --currency-green: #00ff66;
         }
 
         body {
@@ -29,14 +29,64 @@
             align-items: center;
         }
 
-        /* --- BACKGROUND FX --- */
+        /* --- REACTOR BACKGROUND EFFECT --- */
+        .reactor-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.6;
+        }
+
+        .reactor-ring {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: conic-gradient(from 0deg, transparent 0%, var(--energy-color) 25%, transparent 50%, var(--ai-color) 75%, transparent 100%);
+            animation: spin 10s linear infinite;
+            filter: blur(40px);
+        }
+
+        .reactor-core {
+            position: absolute;
+            top: 35%;
+            left: 35%;
+            width: 30%;
+            height: 30%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff 0%, var(--ai-color) 30%, transparent 70%);
+            animation: pulse-core 3s ease-in-out infinite;
+            filter: blur(20px);
+            box-shadow: 0 0 100px var(--ai-color);
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse-core {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.9; }
+        }
+
+        /* --- BACKGROUND STARS --- */
         .stars {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 80%);
+            background: radial-gradient(circle at 50% 50%, transparent 0%, #000 90%);
             z-index: -2;
             pointer-events: none;
         }
@@ -61,12 +111,13 @@
         /* --- HERO SECTION --- */
         header {
             width: 100%;
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
         /* MUSK QUOTE */
@@ -79,6 +130,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             max-width: 800px;
+            z-index: 2;
         }
 
         .musk-quote span {
@@ -102,6 +154,7 @@
             align-items: center;
             width: 100%;
             max-width: 1400px;
+            z-index: 2;
         }
 
         .domain-title {
@@ -155,6 +208,7 @@
             padding: 80px 20px;
             max-width: 1300px;
             width: 100%;
+            z-index: 2;
         }
 
         .section-header {
@@ -316,11 +370,18 @@
             .domains-hero { flex-direction: column; gap: 10px; }
             .divider { display: none; }
             .price-card.featured { transform: scale(1); margin: 20px 0; }
+            .reactor-container { width: 100vw; height: 100vw; opacity: 0.4; }
         }
     </style>
 </head>
 <body>
 
+    <!-- REACTOR EFFECT -->
+    <div class="reactor-container">
+        <div class="reactor-ring"></div>
+        <div class="reactor-core"></div>
+    </div>
+    
     <div class="stars"></div>
 
     <!-- 1. TOP BAR SLOGAN -->
@@ -487,7 +548,7 @@
             <div class="price">$1,200</div>
             <div class="installments">or 3 payments of $400</div>
             <p style="color:#666; font-size:0.8rem;">The backbone of the grid.</p>
-            <a href="https://www.spaceship.com/s/buy/exawatts.energy/ycPNB1TqVr5eZ3Zd" target="_blank" class="btn btn-energy">Acquire .energy</a>
+            <a href="https://www.spaceship.com/s/buy/exawatts.energy/ehfCiVcHRYZUCgFn" target="_blank" class="btn btn-energy">Acquire .energy</a>
         </div>
 
         <!-- BUNDLE CARD (Center / Highlighted) -->
@@ -496,10 +557,8 @@
             <h4 style="color:#fff">The Exawatts Bundle</h4>
             <div class="price">$5,100</div>
             <div class="installments">Includes BOTH domains</div>
-            <!-- 3. OPTIMIZED BUNDLE COPY -->
             <p style="color:#ccc; font-size:0.9rem;">Command the definitive namespace for the Exawatts era.</p>
             
-            <!-- 4. COPY TO CLIPBOARD BUTTON -->
             <button id="bundleBtn" onclick="copyEmail()" class="btn btn-bundle">Contact to Bundle</button>
         </div>
 
@@ -510,7 +569,7 @@
             <div class="price">$4,200</div>
             <div class="installments">or 3 payments of $1,400</div>
             <p style="color:#666; font-size:0.8rem;">The brain of the system.</p>
-            <a href="https://www.spaceship.com/s/buy/exawatts.ai/CkrfUQtLynP60tnv" target="_blank" class="btn btn-ai">Acquire .ai</a>
+            <a href="https://www.spaceship.com/s/buy/exawatts.ai/nfvqKPw8JrGfqx8u" target="_blank" class="btn btn-ai">Acquire .ai</a>
         </div>
 
     </div>
